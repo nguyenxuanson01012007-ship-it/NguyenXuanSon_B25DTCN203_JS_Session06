@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //  đang nhập
+      let accout = "admin";
+      let password = "12345";
+      let count = 0;
+      while (count < 3) {
+        let username = prompt("Mời bạn nhập tài khoản:");
+        let password = prompt("Mời bạn nhập mật khẩu:");
+
+        if (username === "admin" && password === "12345") {
+          alert("Đăng nhập thành công!");
+          break;
+        } else {
+          count++;
+          let remaining = 3 - count;
+
+          if (username !== "admin" && password !== "12345") {
+            alert(
+              `Sai cả tài khoản và mật khẩu! Bạn còn ${remaining} lần thử.`,
+            );
+          } else if (username !== "admin") {
+            alert(`Sai tài khoản! Bạn còn ${remaining} lần thử.`);
+          } else {
+            alert(`Sai mật khẩu! Bạn còn ${remaining} lần thử.`);
+          }
+        }
+      }
+      if (count === 3) {
+        alert("Bạn đã sai quá 3 lần");
+      } else {
+        let libraries = ["Toán", "Văn", "Anh"];
+        let choice;
+        do {
+          choice = +prompt(`
+        === QUẢN LÝ THƯ VIỆN ===
+        1. Nhập thêm lô sách mới
+        2. Hiển thị danh sách sách
+        3. Tìm kiếm sách
+        4. Cập nhật tên sách
+        5. Đảo ngược thứ tự kệ sách
+        6. Nhập kho từ nguồn khác
+        7. Thoát chương trình
+        Mời bạn chọn chức năng (1-7):
+`);
+          switch (choice) {
+            case 1:
+              let newBooks = prompt(
+                "Nhập tên sách mới (cách nhau bằng dấu phẩy):",
+              );
+              let bookArray = newBooks.split(",");
+
+              for (let i = 0; i < bookArray.length; i++) {
+                libraries.push(bookArray[i].trim());
+              }
+              alert("Thêm sách thành công!");
+              break;
+            case 2:
+              for (let i = 0; i < libraries.length; i++) {
+                console.log(`Sách thứ ${i + 1}: ${libraries[i]}`);
+              }
+              break;
+            case 3:
+              let bookSearch = prompt("Nhập tên sách cần tìm:");
+              let indexSearch = libraries.indexOf(bookSearch);
+              if (indexSearch !== -1) {
+                alert(
+                  `Tìm thấy sách "${libraries[indexSearch]}" tại vị trí ${indexSearch + 1}`,
+                );
+              } else {
+                alert("Không tìm thấy sách trong thư viện.");
+              }
+              break;
+            case 4:
+              let bookUpdate = prompt("Nhập tên sách cần cập nhật");
+              let indexUpdate = libraries.indexOf(bookUpdate);
+              if (indexUpdate !== -1) {
+                const newBookName = prompt("Nhập tên sách mới:");
+                libraries[indexUpdate] = newBookName;
+                alert("Cập nhật tên sách thành công!");
+              } else {
+                alert("Không tìm thấy sách cần cập nhật.");
+              }
+              break;
+            case 5:
+              libraries.reverse();
+              console.log("Danh sách sau khi đảo ngược");
+              for (let i = 0; i < libraries.length; i++) {
+                console.log(`Sách thứ ${i + 1} : ${libraries[i]}`);
+              }
+              alert("Đảo ngược kệ sách thành công");
+              break;
+            case 6:
+              let khoMoiInput = prompt(
+                "Nhập danh sách sách của kho mới (cách nhau bằng dấu phẩy):",
+              );
+              let khoMoi = khoMoiInput.split(",");
+              for (let i = 0; i < khoMoi.length; i++) {
+                khoMoi[i] = khoMoi[i].trim();
+              }
+              libraries = libraries.concat(khoMoi);
+
+              alert("Đã nhập kho mới và gộp vào kho hiện tại!");
+              break;
+            case 7:
+              alert("Hẹn gặp lại!");
+              break;
+            default:
+              alert("Lựa chọn không hợp lệ. Vui lòng chọn lại từ 1 đến 7.");
+              break;
+          }
+        } while (choice !== 7);
+      }
+    </script>
+  </body>
+</html>
